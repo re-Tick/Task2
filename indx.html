@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="len" style="margin-bottom: 60px;"><h1>Create a Random Array : </h1>
+        <input type="button" name="len" id="len" >
+        <div id="arr"></div>
+        <h3 style="margin-top: 10%;" id="res"></h3>
+    </label>
+    <script>
+        let arr = []
+        document.getElementById("len").addEventListener("click", function(){
+            
+            let n = Math.floor( Math.random()*10);
+            console.log(n);
+            let arr = [];
+            for(let i=0; i<n ;i++){
+                let x = Math.floor( Math.random()*10);
+                arr.push(x);
+            }
+            console.log(arr);
+            document.getElementById("arr").innerHTML = arr;
+            document.getElementById("res").innerHTML =  "Max repeated, Min repeated:"+mode(arr);
+        })
+        function mode(array)
+        {
+            if(array.length == 0)
+                return (-1+", "+ -1);
+            var modeMap = {};
+            var maxEl = array[0], maxCount = 1, minEl = 20, minCount = 20;
+            for(var i = 0; i < array.length; i++)
+            {
+                var el = array[i];
+                if(modeMap[el] == null)
+                    modeMap[el] = 1;
+                else
+                    modeMap[el]++;  
+                if(modeMap[el] > maxCount)
+                {
+                    maxEl = el;
+                    maxCount = modeMap[el];
+                }
+                else if(modeMap[el]==maxCount && el<maxEl){
+                    maxEl = el;
+                }
+                
+            }
+
+            console.log(Object.entries(modeMap));
+            Object.entries(modeMap).map(el => {
+                if( (parseInt(el[0])<minEl && minCount==el[1]) || minCount>el[1] ){
+                    minEl = parseInt(el[0]);
+                    minCount = el[1];
+                }
+                
+            })
+            return (maxEl+", "+ minEl);
+        }
+
+    </script>
+</body>
+</html>
+
+
+<!-- let array = [1, 2, 3, 4, 5];
+
+console.log(mode(array)); -->
